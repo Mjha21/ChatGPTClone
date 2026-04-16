@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatGPT</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-800 text-white h-screen">
+
+    <div class="flex h-full">
+        <!-- Sidebar -->
+        <div class="left bg-black w-1/5 p-4">
+            <button class="w-[90%] py-2 m-2 px-10 space-x-2 border-white border rounded-md flex mx-4
+            justify-start items-center hover:opacity-70">
+                <svg stroke="currentcolor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round"
+                    stroke-linejoin="round" class="h-4 w-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>New Chat</span>
+            </button>
+
+            <div class="text-xs m-4 mx-8 text-gray-400">Today</div>
+
+            <div class="chats flex flex-col justify-center items-center">
+                {% for chat in myChats %}
+                <div class="chat my-1 space-x-2 opacity-80 w-[90%] px-5 py-2 rounded-md bg-gray-600 cursor-pointer
+                flex justify-start items-center">
+                    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round"
+                        stroke-linejoin="round" class="h-4 w-4" height="1em" width="1em"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                    <span>{{ chat.question }}</span>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="my-1 chats flex flex-col justify-center items-center">
+                <div class="chat space-x-2 opacity-80 w-[90%] px-5 py-2 hover:bg-gray-900 rounded-md
+                 cursor-pointer flex justify-right items-center">
+                    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round"
+                        stroke-linejoin="round" class="h-4 w-4" height="1em" width="1em"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                    <span>Clone AI Assistant</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="right1 w-4/5 flex flex-col justify-between items-center">
+            <!-- Header -->
+            <div class="text-center w-full text-4xl font-bold mt-10">
+                ChatGPT
+            </div>
+
+            <!-- Main Options Section -->
+            <div class="flex justify-center py-6 w-full gap-x-10">
+                <!-- Examples -->
+                <div class="flex flex-col items-center">
+                    <svg stroke="currentcolor" fill="none" stroke-width="1.5" viewBox="0 0 24 24" stroke-linecap="round"
+                        stroke-linejoin="round" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <div class="py-2">Examples</div>
+                    <button class="bg-gray-600 w-52 h-14 text-sm hover:bg-gray-700 rounded-md mb-2">"Explain quantum
+                        computing in simple terms" →</button>
+                    <button class="bg-gray-600 w-52 h-14 text-sm hover:bg-gray-700 rounded-md mb-2">"Got any creative
+                        ideas for a 10 year old's birthday?" →</button>
+                    <button class="bg-gray-600 w-52 h-14 text-sm hover:bg-gray-700 rounded-md">"How do I make an HTTP
+                        request in JavaScript?" →</button>
+                </div>
+
+                <!-- Capabilities -->
+                <div class="flex flex-col items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="h-6 w-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                    </svg>
+                    <div class="py-2">Capabilities</div>
+                    <button class="bg-gray-600 w-52 h-14 text-sm hover:bg-gray-700 rounded-md mb-2">Remembers what user
+                        said earlier in the conversation</button>
+                    <button class="bg-gray-600 w-52 h-14 text-sm hover:bg-gray-700 rounded-md mb-2">Allows user to
+                        provide follow-up corrections</button>
+                    <button class="bg-gray-600 w-52 h-14 text-sm hover:bg-gray-700 rounded-md">Trained to decline
+                        inappropriate requests</button>
+                </div>
+
+                <!-- Limitations -->
+                <div class="flex flex-col items-center">
+                    <svg stroke="currentcolor" fill="none" stroke-width="1.5" viewBox="0 0 24 24" stroke-linecap="round"
+                        stroke-linejoin="round" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                        <line x1="12" y1="9" x2="12" y2="13" />
+                        <line x1="12" y1="17" x2="12.01" y2="17" />
+                    </svg>
+                    <div class="py-2">Limitations</div>
+                    <button class="bg-gray-600 w-52 h-14 text-sm hover:bg-gray-700 rounded-md mb-2">May occasionally
+                        generate incorrect information</button>
+                    <button class="bg-gray-600 w-52 h-14 text-sm hover:bg-gray-700 rounded-md mb-2">May occasionally
+                        produce harmful instructions or biased content</button>
+                    <button class="bg-gray-600 w-52 h-14 text-sm hover:bg-gray-700 rounded-md">Limited knowledge of
+                        world and events after 2023</button>
+                </div>
+            </div>
+
+            <!-- Input Box -->
+            <div class="input w-full text-center my-24 flex items-center justify-center flex-col">
+                <div class="buttonsvg pl-16 w-[50vw] flex">
+                    <input class="w-full p-4 bg-gray-600 rounded-md text-white" placeholder="Send a message..."
+                        type="text" name="text" id="questionInput">
+
+                    <button id="sendButton" class="relative -left-20 pl-10">
+                        <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"
+                            stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 m-1" height="1em" width="1em"
+                            xmlns="https://www.w3.org/2000/svg">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="text-xs py-2 pr-10 opacity-70">Free Research Preview. ChatGPT may produce inaccurate
+                    information about people, places, or facts. <a class="underline"
+                        href="https://help.openai.com/en/articles/6825453-chatgpt-release-notes">
+                        ChatGPT Mar 24 Version</a> </div>
+            </div>
+        </div>
+
+        <div class="right2 hidden w-full flex flex-col items-center h-fit">
+            <div class="box1 m-auto py-7 flex justify-start w-[40vw] items-center space-x-6">
+                <img class="w-9" src="https://chat.openai.com/favicon.ico" alt="">
+                <div id="question1">What is 4,54,324 + 6,34,343</div>
+            </div>
+            <div class="box2 bg-gray-600 py-7 flex justify-center w-full items-center">
+                <div class="box w-[40vw] flex justify-start space-x-6">
+                    <img class="w-9 h-9" src="https://chat.openai.com/favicon.ico" alt="">
+                    <div class="flex space-y-4 flex-col">
+                        <div id="question2">what is 4,54,324 + 6,34,343</div>
+                        <div id="solution">loading...</div>
+                    </div>
+                </div>
+            </div>
+            <div class="input pt-60 w-full text-center my-24 flex items-center justify-center flex-col">
+                <div class="buttonsvg pl-16 w-[50vw] flex">
+                    <input class="w-full p-4 bg-gray-600 rounded-md text-white" placeholder="Send a message..."
+                        type="text">
+                    <button class="relative -left-20 pl-10">
+                        <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"
+                            stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 m-1" height="1em" width="1em"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="text-xs py-2 pr-10 opacity-70">Free Research Preview. ChatGPT may produce inaccurate
+                    information about people, places, or facts. <a class="underline"
+                        href="https://help.openai.com/en/articles/6825453-chatgpt-release-notes">
+                        ChatGPT Mar 24 Version
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/script.js"></script>
+</body>
+</html>
